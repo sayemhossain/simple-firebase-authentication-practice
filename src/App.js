@@ -4,7 +4,14 @@ import { getAuth } from "firebase/auth";
 
 const auth = getAuth(app);
 function App() {
-  return <div className="App"></div>;
+  const handleGoogleSignIn = () => {
+    console.log("working");
+  };
+  return (
+    <div className="App">
+      <button onClick={handleGoogleSignIn}>google signIn</button>
+    </div>
+  );
 }
 
 export default App;
