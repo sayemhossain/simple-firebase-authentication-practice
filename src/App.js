@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const auth = getAuth(app);
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const provider = new GoogleAuthProvider();
 
   const handleGoogleSignIn = () => {
