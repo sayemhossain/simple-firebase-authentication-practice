@@ -40,6 +40,7 @@ function App() {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        console.log(user);
       })
       .catch((error) => console.log(error));
   };
@@ -49,7 +50,7 @@ function App() {
         <button onClick={handleLogOut}>Logout</button>
       ) : (
         <>
-          <button onClick={handleGoogleSignIn}>Google signIn</button>
+          <button onClick={handleGoogleSignIn}>Googl signIn</button>
           <button onClick={handleGithubSignIn}>Github signIn</button>
         </>
       )}
