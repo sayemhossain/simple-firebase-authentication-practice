@@ -50,7 +50,7 @@ function App() {
         <button onClick={handleLogOut}>Logout</button>
       ) : (
         <>
-          <button onClick={handleGoogleSignIn}>Googl signIn</button>
+          <button onClick={handleGoogleSignIn}>Google signIn</button>
           <button onClick={handleGithubSignIn}>Github signIn</button>
         </>
       )}
