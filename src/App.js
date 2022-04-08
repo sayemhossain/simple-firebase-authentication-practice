@@ -25,7 +25,7 @@ function App() {
       })
       .catch((error) => console.log(error));
   };
-  // this  is google signout
+  // this  is  signout
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
@@ -42,11 +42,14 @@ function App() {
         setUser(user);
         console.log(user);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   return (
     <div className="App">
-      {user.email ? (
+      {user.uid ? (
         <button onClick={handleLogOut}>Logout</button>
       ) : (
         <>
