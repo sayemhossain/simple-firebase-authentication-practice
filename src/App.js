@@ -78,6 +78,7 @@ function App() {
             name="password"
             id=""
           />
+          <input type="submit" value="Submit" />
         </form>
       </div>
 
