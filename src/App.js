@@ -58,6 +58,11 @@ function App() {
     console.log(e.target.value);
   };
 
+  // this is for form submit
+  const handleFormSubmit = (e) => {
+    console.log("Form submited");
+    e.preventDefault();
+  };
   return (
     <div className="App">
       {user.uid ? (
@@ -70,7 +75,7 @@ function App() {
       )}
 
       <div>
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <input onBlur={handleEmailBlur} type="email" name="email" id="" />
           <input
             onBlur={handlePasswordBlur}
