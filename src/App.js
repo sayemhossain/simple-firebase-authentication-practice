@@ -47,6 +47,17 @@ function App() {
       });
   };
 
+  // this is for email password auth
+  // this is for email
+  const handleEmailChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  // this is for password
+  const handlePasswordChange = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <div className="App">
       {user.uid ? (
@@ -60,6 +71,18 @@ function App() {
       <h3>Name: {user.displayName}</h3>
       <p>Gmail: {user.email}</p>
       <img src={user.photoURL} alt="" />
+
+      <div>
+        <form>
+          <input onChange={handleEmailChange} type="email" name="email" id="" />
+          <input
+            onChange={handlePasswordChange}
+            type="password"
+            name="password"
+            id=""
+          />
+        </form>
+      </div>
     </div>
   );
 }
