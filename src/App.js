@@ -49,12 +49,12 @@ function App() {
 
   // this is for email password auth
   // this is for email
-  const handleEmailChange = (e) => {
+  const handleEmailBlur = (e) => {
     console.log(e.target.value);
   };
 
   // this is for password
-  const handlePasswordChange = (e) => {
+  const handlePasswordBlur = (e) => {
     console.log(e.target.value);
   };
 
@@ -68,21 +68,22 @@ function App() {
           <button onClick={handleGithubSignIn}>Github signIn</button>
         </>
       )}
-      <h3>Name: {user.displayName}</h3>
-      <p>Gmail: {user.email}</p>
-      <img src={user.photoURL} alt="" />
 
       <div>
         <form>
-          <input onChange={handleEmailChange} type="email" name="email" id="" />
+          <input onBlur={handleEmailBlur} type="email" name="email" id="" />
           <input
-            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
             type="password"
             name="password"
             id=""
           />
         </form>
       </div>
+
+      <h3>Name: {user.displayName}</h3>
+      <p>Gmail: {user.email}</p>
+      <img src={user.photoURL} alt="" />
     </div>
   );
 }
