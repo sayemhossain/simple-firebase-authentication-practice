@@ -102,7 +102,7 @@ function App() {
   //  this is for register checkbox
 
   const handleRegChange = (e) => {
-    console.log(e.target.checked);
+    setRegistered(e.target.checked);
   };
 
   return (
@@ -114,7 +114,9 @@ function App() {
       </div>
 
       <div className="mx-auto bg-info w-50">
-        <h2 className="text-center pt-3">Registration Form</h2>
+        <h2 className="text-center pt-3">
+          {registered ? "Login" : "Registration"} Form
+        </h2>
         <Form
           noValidate
           validated={validated}
@@ -156,7 +158,7 @@ function App() {
           </Form.Group>
           <p className="text-danger">{error}</p>
           <Button variant="primary" type="submit">
-            Register
+            {registered ? "Login" : "Register"}
           </Button>
         </Form>
         <div className="text-center p-3">
