@@ -77,8 +77,8 @@ function App() {
       return;
     }
 
-    if (!/(?=.*[a-zA-Z >>!#$%&? "<<])/.test(password)) {
-      setError("Please use at least one special Character.");
+    if (!/(?=.*\d)/.test(password)) {
+      setError("Please use at least one digit.");
       return;
     }
     setValidated(true);
