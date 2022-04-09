@@ -6,6 +6,7 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   signOut,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -65,9 +66,15 @@ function App() {
 
   // this is for form submit
   const handleFormSubmit = (e) => {
-    console.log("Form submited", email, password);
     e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
   };
+
   return (
     <div>
       <div className="text-center mt-3">
