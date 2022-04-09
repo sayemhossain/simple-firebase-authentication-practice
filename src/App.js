@@ -15,6 +15,8 @@ import { Button, Form } from "react-bootstrap";
 const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState({});
+  const [email, setEmail] = useState({});
+  const [password, setPassword] = useState({});
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
@@ -53,47 +55,38 @@ function App() {
   // this is for email password auth
   // this is for email
   const handleEmailBlur = (e) => {
-    console.log(e.target.value);
+    setEmail(e.target.value);
   };
 
   // this is for password
   const handlePasswordBlur = (e) => {
-    console.log(e.target.value);
+    setPassword(e.target.value);
   };
 
   // this is for form submit
   const handleFormSubmit = (e) => {
-    console.log("Form submited");
+    console.log("Form submited", email, password);
     e.preventDefault();
   };
   return (
     <div>
-      <div className="text-center my-5">
-        {user.uid ? (
-          <button onClick={handleLogOut}>Logout</button>
-        ) : (
-          <>
-            <button onClick={handleGoogleSignIn}>Google signIn</button>
-            <button onClick={handleGithubSignIn}>Github signIn</button>
-          </>
-        )}
-
+      <div className="text-center mt-3">
         <h3>Name: {user.displayName}</h3>
         <p>Gmail: {user.email}</p>
         <img src={user.photoURL} alt="" />
       </div>
 
-      <div className="mx-auto bg-success w-50">
+      <div className="mx-auto bg-info w-50">
         <h2 className="text-center pt-3">Registration Form</h2>
         <Form onSubmit={handleFormSubmit} className=" mx-auto  p-5">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-2" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               onBlur={handleEmailBlur}
               type="email"
               placeholder="Enter email"
             />
-            <Form.Text className="text-muted">
+            <Form.Text className=" text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
@@ -106,13 +99,27 @@ function App() {
               placeholder="Password"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
           <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>
+        <div className="text-center p-3">
+          {user.uid ? (
+            <button onClick={handleLogOut}>Logout</button>
+          ) : (
+            <>
+              <button
+                className="me-4 btn btn-danger"
+                onClick={handleGoogleSignIn}
+              >
+                Google signIn
+              </button>
+              <button className="btn btn-warning" onClick={handleGithubSignIn}>
+                Github signIn
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
