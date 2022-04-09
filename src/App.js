@@ -18,6 +18,8 @@ function App() {
   const [user, setUser] = useState({});
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
+  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState("");
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
@@ -67,6 +69,21 @@ function App() {
   // this is for form submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    if (!/(?=.*[a-zA-Z >>!#$%&? "<<])/.test(password)) {
+      setError("Please use at least one special Character.");
+      return;
+    }
+    setValidated(true);
+    setError("");
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
@@ -86,13 +103,19 @@ function App() {
 
       <div className="mx-auto bg-info w-50">
         <h2 className="text-center pt-3">Registration Form</h2>
-        <Form onSubmit={handleFormSubmit} className=" mx-auto  p-5">
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={handleFormSubmit}
+          className=" mx-auto  p-5"
+        >
           <Form.Group className="mb-2" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               onBlur={handleEmailBlur}
               type="email"
               placeholder="Enter email"
+              required
             />
             <Form.Text className=" text-muted">
               We'll never share your email with anyone else.
@@ -105,8 +128,13 @@ function App() {
               onBlur={handlePasswordBlur}
               type="password"
               placeholder="Password"
+              required
             />
+            <Form.Control.Feedback type="invalid">
+              Please choose a valid password.
+            </Form.Control.Feedback>
           </Form.Group>
+          <p className="text-danger">{error}</p>
           <Button variant="primary" type="submit">
             Submit
           </Button>
