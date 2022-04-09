@@ -52,6 +52,7 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
+        setError(error);
       });
   };
 
@@ -88,9 +89,14 @@ function App() {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        setEmail("");
+        setPassword("");
         console.log(user);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setError(error);
+        console.error(error);
+      });
   };
 
   return (
@@ -134,9 +140,16 @@ function App() {
               Please choose a valid password.
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check
+              className="text-black"
+              type="checkbox"
+              label="Already Registered ?"
+            />
+          </Form.Group>
           <p className="text-danger">{error}</p>
           <Button variant="primary" type="submit">
-            Submit
+            Register
           </Button>
         </Form>
         <div className="text-center p-3">
