@@ -157,7 +157,7 @@ function App() {
             />
           </Form.Group>
           <p className="text-danger">{error}</p>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" className="btn btn-success" type="submit">
             {registered ? "Login" : "Register"}
           </Button>
         </Form>
