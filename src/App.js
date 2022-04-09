@@ -16,6 +16,7 @@ import { Button, Form } from "react-bootstrap";
 const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState({});
+  const [registered, setRegistered] = useState(false);
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
   const [validated, setValidated] = useState(false);
@@ -98,6 +99,11 @@ function App() {
         console.error(error);
       });
   };
+  //  this is for register checkbox
+
+  const handleRegChange = (e) => {
+    console.log(e.target.checked);
+  };
 
   return (
     <div>
@@ -142,6 +148,7 @@ function App() {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check
+              onChange={handleRegChange}
               className="text-black"
               type="checkbox"
               label="Already Registered ?"
