@@ -70,6 +70,7 @@ function App() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
+        setUser(user);
         console.log(user);
       })
       .catch((error) => console.error(error));
