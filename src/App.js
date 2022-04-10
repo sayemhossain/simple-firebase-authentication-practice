@@ -7,6 +7,8 @@ import {
   signInWithPopup,
   signOut,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -86,25 +88,37 @@ function App() {
     setValidated(true);
     setError("");
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-        setEmail("");
-        setPassword("");
-        console.log(user);
-      })
-      .catch((error) => {
-        setError(error);
-        console.error(error);
-      });
+    if (registered) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((result) => console.log(result))
+        .then((error) => setError(error));
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+          const user = result.user;
+          setUser(user);
+          setEmail("");
+          setPassword("");
+          console.log(user);
+          handleEmailVerify();
+        })
+        .catch((error) => {
+          setError(error);
+          console.error(error);
+        });
+    }
   };
   //  this is for register checkbox
-
   const handleRegChange = (e) => {
     setRegistered(e.target.checked);
   };
 
+  // this is for email verification
+  const handleEmailVerify = () => {
+    sendEmailVerification(auth.currentUser).then(() => {
+      console.log("Email verification send.");
+    });
+  };
   return (
     <div>
       <div className="text-center mt-3">
@@ -163,7 +177,9 @@ function App() {
         </Form>
         <div className="text-center p-3">
           {user.uid ? (
-            <button onClick={handleLogOut}>Logout</button>
+            <button className="btn btn-danger" onClick={handleLogOut}>
+              Logout
+            </button>
           ) : (
             <>
               <button
