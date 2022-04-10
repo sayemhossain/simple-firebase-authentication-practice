@@ -20,8 +20,8 @@ const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState({});
   const [registered, setRegistered] = useState(false);
-  const [email, setEmail] = useState({});
-  const [password, setPassword] = useState({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState("");
   const googleProvider = new GoogleAuthProvider();
