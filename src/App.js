@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -119,6 +120,17 @@ function App() {
       console.log("Email verification send.");
     });
   };
+
+  // this is for forgot password
+  const handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("Password reset email sent!");
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
   return (
     <div>
       <div className="text-center mt-3">
@@ -170,6 +182,13 @@ function App() {
               label="Already Registered ?"
             />
           </Form.Group>
+          <Button
+            onClick={handleForgotPassword}
+            className="text-danger"
+            variant="link"
+          >
+            Forgot password?
+          </Button>
           <p className="text-danger">{error}</p>
           <Button variant="primary" className="btn btn-success" type="submit">
             {registered ? "Login" : "Register"}
